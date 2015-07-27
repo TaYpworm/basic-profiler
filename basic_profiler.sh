@@ -34,4 +34,4 @@ if [ -z "$PID" ]; then
 fi
 
 # Grab the second line of PS output and send it to the output file and screen.
-watch -e -n $INTERVAL "ps o pid,pcpu,cputime,etime,size,rss,vsz,cmd -p $PID | awk 'NR==2' | tee -a $OUTFILE"
+watch -n $INTERVAL "ps o pid,pcpu,cputime,etime,size,rss,vsz,cmd -p $PID | awk 'NR==2' | tee -a $OUTFILE"
