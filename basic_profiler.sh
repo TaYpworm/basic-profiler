@@ -5,7 +5,7 @@
 # File output will be appended to "profile.out" or command line specified file.
 # Should shut down when process being watched stops.
 
-INTERVAL=1
+INTERVAL=2 				# two seconds is watch default
 OUTFILE=profile.out
 PID=
 
