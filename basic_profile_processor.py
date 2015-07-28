@@ -18,6 +18,9 @@ def main(args):
 		write_profile(out_prefix + 'stats_' + time + '.json', profile)
 		write_plot(out_prefix + 'plot_' + time + '.png', profile)
 
+'''
+Read the profile from file into a Profile object.
+'''
 def read_profile(file_name):
 	f = open(file_name, 'r')
 	profile = Profile()
@@ -26,7 +29,13 @@ def read_profile(file_name):
 
 	return profile
 
+'''	
+Create a plot with two subplots.
+The top plot will plot percent cpu usage over time.
+The bottom plot will plot resident memory over time. 
+'''
 def write_plot(file_name, profile):
+	
 	plt.figure(1)
 	x = np.arange(0, len(profile.process_data['pcpu']))
 
@@ -41,6 +50,9 @@ def write_plot(file_name, profile):
 
 	plt.savefig(file_name)
 
+'''
+Write the profile statistics to a json file.
+'''
 def write_profile(file_name, profile):
 	f = open(file_name, 'w')
 	json.dump(profile.calc_statistics(), f, sort_keys=True, indent=2)

@@ -19,7 +19,10 @@ class Profile(object):
 	def __repr__(self):
 		return str(self.calc_statistics())
 
-	# sample = whitespace delimited sample of format "pid pcpu cputime etime size rss vsz cmd"
+	'''
+	Add a sample to the data structure.
+	sample = whitespace delimited sample of format "pid pcpu cputime etime size rss vsz cmd"
+	'''
 	def process_sample(self, sample):
 		# split sample on whitespace
 		# command may contain whitespace, so limit splits to 7
@@ -42,18 +45,24 @@ class Profile(object):
 		self.process_data['size'].append(int(data[4]))
 		# rss = resident set size, non-swapped physical memory task has used in KiB, float
 		# stored in MiB
-		self.process_data['rss'].append(self._to_mb(float(data[5])))
+		self.process_data['rss'].append(self._kb_to_mb(float(data[5])))
 		# vsz = virtual memory size in KiB, float
 		# stored in MiB
-		self.process_data['vsz'].append(self._to_mb(float(data[6])))
+		self.process_data['vsz'].append(self._kb_to_mb(float(data[6])))
 		# cmd = command, string
 		if not self.cmd:
 			self.cmd = data[7]
 
-	# kb = kilobytes
-	def _to_mb(self, kb):
+	'''
+	Convert from kilobytes to megabytes
+	kb = kilobytes
+	'''
+	def _kb_to_mb(self, kb):
 		return kb / 1024.0
 
+	'''
+	Calculate statistics and return as a dictionary.
+	'''
 	def calc_statistics(self):
 		stats = {
 			'cmd': self.cmd,
