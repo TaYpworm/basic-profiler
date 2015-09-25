@@ -36,11 +36,9 @@ class Profile(object):
 		# pcpu = percent cpu, float
 		self.process_data['pcpu'].append(float(data[1]))
 		# cputime = time on cpu, cumulative, string
-		if not self.cpu_time:
-			self.cpu_time = data[2]
+		self.cpu_time = data[2]
 		# etime = total clock time, cumulative, string
-		if not self.elapsed_time:
-			self.elapsed_time = data[3]
+		self.elapsed_time = data[3]
 		# size = rough size if resident application written to swap, int
 		self.process_data['size'].append(int(data[4]))
 		# rss = resident set size, non-swapped physical memory task has used in KiB, float
